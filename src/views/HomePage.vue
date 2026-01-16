@@ -1,7 +1,27 @@
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
+import type { DialogTransition } from "element-plus";
 
 const dialogVisible = ref(false);
+const currentAnimation = ref("fade");
+const isObjectConfig = ref(false);
+
+const transitionConfig = computed<DialogTransition>(() => {
+  if (isObjectConfig.value) {
+    return {
+      name: "dialog-custom-object",
+      appear: true,
+      mode: "out-in",
+      duration: 500,
+    };
+  }
+  return `dialog-${currentAnimation.value}`;
+});
+const openDialog = (type: string) => {
+  currentAnimation.value = type;
+  isObjectConfig.value = false;
+  dialogVisible.value = true;
+};
 
 import { h } from "vue";
 import { ElNotification } from "element-plus";
@@ -114,7 +134,7 @@ onMounted(() => {
 
         <span>Github</span>
       </div>
-      <div class="button coffee" @click="dialogVisible = true">
+      <div class="button coffee" @click="openDialog('bounce')">
         <el-icon size="3rem">
           <HotWater />
         </el-icon>
@@ -122,7 +142,8 @@ onMounted(() => {
       </div>
       <el-dialog
         v-model="dialogVisible"
-        :before-close="handleClose"
+        :transition="transitionConfig"
+        class="custom-transition-dialog"
         title="投喂"
         width="500"
       >
@@ -222,5 +243,26 @@ onMounted(() => {
 
 .logo {
   filter: drop-shadow(0 0 2em #366c39);
+}
+</style>
+
+<style>
+/* Bounce Animation */
+.dialog-bounce-enter-active,
+.dialog-bounce-leave-active,
+.dialog-bounce-enter-active .el-dialog,
+.dialog-bounce-leave-active .el-dialog {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dialog-bounce-enter-from,
+.dialog-bounce-leave-to {
+  opacity: 0;
+}
+
+.dialog-bounce-enter-from .el-dialog,
+.dialog-bounce-leave-to .el-dialog {
+  transform: scale(0.3) translateY(-50px);
+  opacity: 0;
 }
 </style>
