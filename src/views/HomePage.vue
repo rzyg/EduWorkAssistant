@@ -1,8 +1,99 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const dialogVisible = ref(false);
+
+import { h } from "vue";
+import { ElNotification } from "element-plus";
+
+// 不同时间段的随机提示语
+const timeBasedMessages = {
+  morning: [
+    // 早上 6:00-9:00
+    "早安！美好的一天开始了",
+    "新的一天，新的开始",
+    "元气满满的一天，加油！",
+    "晨光初照，活力无限",
+    "早起的鸟儿有虫吃",
+  ],
+  forenoon: [
+    // 上午 9:00-12:00
+    "上午好！工作顺利",
+    "专注工作，效率最高",
+    "上午时光，事半功倍",
+    "精神饱满，状态最佳",
+    "今日计划，逐步完成",
+  ],
+  afternoon: [
+    // 下午 12:00-18:00
+    "下午好！继续努力",
+    "午后时光，稳步前行",
+    "保持节奏，不要急躁",
+    "阳光正好，心情也美",
+    "工作推进，渐入佳境",
+  ],
+  evening: [
+    // 傍晚 18:00-22:00
+    "傍晚好！注意劳逸结合",
+    "工作之余，也要放松",
+    "夕阳西下，美景相伴",
+    "适时休息，恢复精力",
+    "今日份的努力，值得肯定",
+  ],
+  night: [
+    // 夜晚 22:00-6:00
+    "夜深了，早点休息吧",
+    "熬夜伤身，早点睡",
+    "明天还要早起，该休息了",
+    "深夜时分，身体需要休息",
+    "早点睡觉，明天更美好",
+  ],
+};
+
+const notice = () => {
+  const hour = new Date().getHours();
+  let period: keyof typeof timeBasedMessages;
+
+  if (hour >= 6 && hour < 9) {
+    period = "morning";
+  } else if (hour >= 9 && hour < 12) {
+    period = "forenoon";
+  } else if (hour >= 12 && hour < 18) {
+    period = "afternoon";
+  } else if (hour >= 18 && hour < 22) {
+    period = "evening";
+  } else {
+    period = "night";
+  }
+
+  // 从对应时间段随机选择一条提示
+  const messages = timeBasedMessages[period];
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+  ElNotification({
+    title: getPeriodTitle(period),
+    duration: 1500,
+    message: h("i", { style: "color: teal" }, randomMessage),
+  });
+};
+
+// 获取时间段标题
+const getPeriodTitle = (period: keyof typeof timeBasedMessages) => {
+  const titles: Record<keyof typeof timeBasedMessages, string> = {
+    morning: "早上好",
+    forenoon: "上午好",
+    afternoon: "下午好",
+    evening: "傍晚好",
+    night: "温馨提示",
+  };
+  return titles[period];
+};
+
+onMounted(() => {
+  notice(); // 页面加载完成后自动执行
+});
 </script>
+
 <template>
   <div class="container">
     <div class="start-page">
