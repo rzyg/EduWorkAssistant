@@ -59,7 +59,9 @@
     </el-row>
   </div>
   <div class="content-area">
-    <router-view />
+    <transition mode="out-in" name="page-transition">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -98,5 +100,34 @@
 .content-area {
   flex: 1;
   padding: 0.5rem;
+}
+</style>
+<style>
+.page-transition-enter-active,
+.page-transition-leave-active {
+  transition: all 0.3s ease;
+}
+.page-transition-enter-from {
+  transform: translateX(100%);
+}
+.page-transition-leave-to {
+  transform: translateX(-100%);
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.3s ease;
+}
+.slide-left-enter-from {
+  transform: translateX(100%);
+}
+.slide-left-leave-to {
+  transform: translateX(-100%);
+}
+.page-transition-enter-from {
+  transform: translateY(-100%);
+}
+.page-transition-leave-to {
+  transform: translateY(100%);
 }
 </style>
