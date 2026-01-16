@@ -3,13 +3,17 @@
   <div class="sidebar">
     <el-row class="tac">
       <el-col>
-        <div class="header-title">
-          <img alt="logo" height="64" src="./resources/icons/128x128.png" />
-          <h2 class="mb-2" style="text-align: center; margin-right: 0.5rem">
-            下班工具箱
-          </h2>
-        </div>
-        <el-menu class="el-menu-vertical-demo" default-active="0">
+        <el-menu
+          class="el-menu-vertical-demo"
+          default-active="0"
+          style="height: 100%"
+        >
+          <div class="header-title">
+            <img alt="logo" height="64" src="./resources/icons/128x128.png" />
+            <h2 class="mb-2" style="text-align: center; margin-right: 0.5rem">
+              下班工具箱
+            </h2>
+          </div>
           <!--主页-->
           <el-menu-item index="0" @click="$router.push('/HomePage')">
             <el-icon><House /></el-icon>
@@ -63,7 +67,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin: 0.3rem 0 0 0.5rem;
+  padding: 0.3rem 0 0 0.5rem;
 }
 
 .sidebar {
