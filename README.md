@@ -28,7 +28,7 @@ EduWork Assistant 集成了一系列针对教师日常工作场景的实用工�
 
 ## 📦 获取与开始使用
 
-1. **下载安装**：前往 [Releases](https://github.com/rzyg/OffWorkKit/releases)
+1. **下载安装**：前往 [Releases](https://github.com/rzyg/EduWorkAssistant/releases)
    页面，下载适用于您操作系统（Windows/macOS/Linux）的最新安装包。
 2. **安装运行**：像安装其他软件一样完成安装，双击即可开启效率之旅。
 3. **系统要求**：最低要求Windows 10 1809 或更高版本，推荐使用64位系统。
@@ -38,7 +38,7 @@ EduWork Assistant 集成了一系列针对教师日常工作场景的实用工�
 EduWork Assistant 是一个开源项目，我们欢迎所有教育工作者和开发者参与贡献，让它变得更好。
 
 - **技术栈**：Vue 3 + Tauri + Rust + Python
-- **提出建议或问题**：欢迎在 [Issues](https://github.com/rzyg/OffWorkKit/issues) 页面分享您的想法或报告Bug。
+- **提出建议或问题**：欢迎在 [Issues](https://github.com/rzyg/EduWorkAssistant/issues) 页面分享您的想法或报告Bug。
 
 ## 📄 许可证
 
