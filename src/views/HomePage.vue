@@ -1,28 +1,15 @@
 <script lang="ts" setup>
 import { ref } from "vue";
-import { ElMessageBox } from "element-plus";
 
 const dialogVisible = ref(false);
-
-const handleClose = (done: () => void) => {
-  ElMessageBox.confirm("Are you sure to close this dialog?")
-    .then(() => {
-      done();
-    })
-    .catch(() => {
-      // catch error
-    });
-};
 </script>
 <template>
   <div class="container">
     <div class="start-page">
-      <img alt="Logo" src="../resources/icons/128x128@2x.png" />
-      <!-- 或使用 <img> 标签 -->
+      <img alt="Logo" class="logo" src="../resources/icons/128x128@2x.png" />
       <h1 class="app-title">
         𝑬𝒅𝒖𝑾𝒐𝒓𝒌 𝑨𝒔𝒔𝒊𝒔𝒕𝒂𝒏𝒕<span class="version">v0.0.1</span>
       </h1>
-      <!-- 替换为你的应用名 -->
       <p class="tagline">让重复的工作自动化 还宝贵的时间于休息</p>
     </div>
     <div class="button-container">
@@ -92,6 +79,7 @@ const handleClose = (done: () => void) => {
   margin: 1rem 3rem 3rem 0;
   font-family: "SimSun", serif;
   font-size: 1.25rem;
+  cursor: pointer;
 }
 
 .button-container {
@@ -139,5 +127,9 @@ const handleClose = (done: () => void) => {
   max-width: 600px;
   margin: 0 auto;
   font-family: "SimSun", serif;
+}
+
+.logo {
+  filter: drop-shadow(0 0 2em #366c39);
 }
 </style>
