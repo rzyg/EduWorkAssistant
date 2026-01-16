@@ -7,7 +7,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "offwork",
+    "productName": "EduWork Assistant",
     "version": "0.1.0"
   },
   "tauri": {
@@ -20,7 +20,7 @@
     },
     "windows": [
       {
-        "title": "OffWorkKit",
+        "title": "EduWork Assistant",
         "width": 1080,
         "height": 720
       }
