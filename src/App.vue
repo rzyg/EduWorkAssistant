@@ -6,7 +6,14 @@
         <el-menu
           class="el-menu-vertical-demo"
           default-active="0"
-          style="height: 100%"
+          style="
+            height: 100%;
+            background: linear-gradient(
+              135deg,
+              #f8fffe 0%,
+              #ebedf3 100%
+            ); /* 简约渐变背景 */
+          "
         >
           <div class="header-title">
             <img alt="logo" height="64" src="./resources/icons/128x128.png" />
@@ -24,7 +31,6 @@
             <el-icon><Memo /></el-icon>
             <span>成绩分析</span>
           </el-menu-item>
-
           <!--津贴计算-->
           <el-sub-menu index="2">
             <template #title>
@@ -75,6 +81,7 @@
   height: 100vh;
   margin: 0 0.5rem 0 0;
   padding: 0;
+  background-color: #f0f2f7;
 }
 
 /* 去除 router-link 默认样式 */
@@ -89,6 +96,7 @@
 }
 
 .content-area {
+  flex: 1;
   padding: 0.5rem;
 }
 </style>
