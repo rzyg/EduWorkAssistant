@@ -108,22 +108,68 @@ const getPeriodTitle = (period: keyof typeof timeBasedMessages) => {
   return titles[period];
 };
 
-onMounted(() => {
-  notice(); // 页面加载完成后自动执行
-  getAppVersion();
-});
+const appVersion = ref("");
 
 //获取版本号
-const appVersion = ref("v0.0.0");
-
-async function getAppVersion() {
+async function getAppVersion(): Promise<void> {
   try {
     const version = await getVersion();
     appVersion.value = `v${version}`;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("获取版本失败:", error);
   }
 }
+
+async function getVersionAndNotice(): Promise<void> {
+  await new Promise((resolve) => setTimeout(resolve, 100));
+  const url =
+    "https://gist.githubusercontent.com/Barbatos411/28df2c21b8675894091dd32ec2aa0f55/raw/EWA_info.json";
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+
+    const version = data.version || "v0.0.0";
+    let noticeList = data.notice || [];
+
+    // 如果版本号相同，则移除通知
+    if (version == appVersion.value) {
+      if (noticeList.length > 0) {
+        noticeList.shift();
+      }
+    }
+
+    // 使用异步延迟避免通知堆积
+    for (let i = 0; i < noticeList.length; i++) {
+      const item = noticeList[i];
+      if (item && item.title && item.content) {
+        ShowNotice(item.title, item.content, item.type);
+        // 添加短暂延迟，让通知依次显示
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+    }
+  } catch (error: unknown) {
+    console.error("获取版本失败:", error);
+  }
+}
+
+const ShowNotice = (title: string, message: string, type: any): void => {
+  ElNotification({
+    type: type,
+    title: title,
+    message: message,
+    duration: 0,
+  });
+};
+
+onMounted(() => {
+  notice(); // 页面加载完成后自动执行
+  getAppVersion();
+  getVersionAndNotice();
+});
 </script>
 
 <template>
