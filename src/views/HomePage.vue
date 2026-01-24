@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { ref, onMounted, computed } from "vue";
+import { getVersion } from "@tauri-apps/api/app";
+import { computed, h, onMounted, ref } from "vue";
 import type { DialogTransition } from "element-plus";
+import { ElNotification } from "element-plus";
 
 const dialogVisible = ref(false);
 const currentAnimation = ref("fade");
@@ -22,9 +24,6 @@ const openDialog = (type: string) => {
   isObjectConfig.value = false;
   dialogVisible.value = true;
 };
-
-import { h } from "vue";
-import { ElNotification } from "element-plus";
 
 // 不同时间段的随机提示语
 const timeBasedMessages = {
@@ -111,7 +110,20 @@ const getPeriodTitle = (period: keyof typeof timeBasedMessages) => {
 
 onMounted(() => {
   notice(); // 页面加载完成后自动执行
+  getAppVersion();
 });
+
+//获取版本号
+const appVersion = ref("v0.0.0");
+
+async function getAppVersion() {
+  try {
+    const version = await getVersion();
+    appVersion.value = `v${version}`;
+  } catch (error) {
+    console.error("获取版本失败:", error);
+  }
+}
 </script>
 
 <template>
@@ -119,7 +131,7 @@ onMounted(() => {
     <div class="start-page">
       <img alt="Logo" class="logo" src="../resources/icons/128x128@2x.png" />
       <h1 class="app-title">
-        𝑬𝒅𝒖𝑾𝒐𝒓𝒌 𝑨𝒔𝒔𝒊𝒔𝒕𝒂𝒏𝒕<span class="version">v0.0.1</span>
+        𝑬𝒅𝒖𝑾𝒐𝒓𝒌 𝑨𝒔𝒔𝒊𝒔𝒕𝒂𝒏𝒕<span class="version">{{ appVersion }}</span>
       </h1>
       <p class="tagline">让重复的工作自动化 还宝贵的时间于休息</p>
     </div>
