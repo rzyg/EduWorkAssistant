@@ -5,6 +5,7 @@ import ScheduleMake from "../views/ScheduleMake.vue";
 import CalendarPage from "../views/CalendarPage.vue";
 import AutomaticCourse from "../views/AutomaticCourse.vue";
 import SettingPage from "../views/SettingPage.vue";
+import PdfEdit from "../views/PDFEdit.vue";
 
 const routes = [
   { path: "/", redirect: "/HomePage" }, // 默认重定向
@@ -18,6 +19,7 @@ const routes = [
     name: "AutomaticCourse",
   },
   { path: "/SettingPage", component: SettingPage, name: "SettingPage" },
+  { path: "/PDFEdit", component: PdfEdit, name: "PDFEdit" },
 ];
 
 const router = createRouter({

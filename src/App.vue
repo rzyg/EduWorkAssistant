@@ -49,8 +49,13 @@
             <el-icon><document /></el-icon>
             <span>自动刷课</span>
           </el-menu-item>
+          <!--PDF编辑-->
+          <el-menu-item index="4" @click="$router.push('/PDFEdit')">
+            <el-icon><setting /></el-icon>
+            <span>PDF编辑</span>
+          </el-menu-item>
           <!--设置-->
-          <el-menu-item index="4" @click="$router.push('/SettingPage')">
+          <el-menu-item index="5" @click="$router.push('/SettingPage')">
             <el-icon><setting /></el-icon>
             <span>设置</span>
           </el-menu-item>
